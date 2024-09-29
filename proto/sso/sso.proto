@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package auth;
+
+
+option go_package = "spreme2499.sso.v1;ssov1";
+
+service Auth {
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegisterRequest {
+    string email = 1; // адрес электронной почты для регистрации пользователя
+    string password = 2; // пароль пользователя для регестрации 
+}
+
+message RegisterResponse {
+    int64 user_id = 1; //
+}
+
+message LoginRequest {
+    string email = 1; // почта пользователя для входа в систему
+    string password = 2; // пароль пользователя для входа в систему
+    int32 app_id = 3; // индефикатор приложения для входа в систему
+}
+
+message LoginResponse {
+    string token = 1; // токен аунтификации вошедшего в систему пользователя
+}
+
+message IsAdminRequest {
+    int64 user_id = 1; // id пользователя для индефикации 
+}
+
+
+message IsAdminResponse {
+    bool is_admin = 1; // указывает является ли пользователь админом
+}
+
